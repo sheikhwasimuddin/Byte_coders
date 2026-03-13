@@ -1,0 +1,6 @@
+flask>=3.0.0
+flask-cors>=4.0.0
+torch>=2.2.0
+transformers>=4.38.0
+pylint>=3.0.0
+bandit>=1.7.0
