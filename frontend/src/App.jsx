@@ -1,6 +1,19 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
-import { Bug, Download, Play, Shield, Trash2, Upload, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Bug,
+  CheckCircle,
+  Download,
+  Play,
+  Search,
+  Shield,
+  Terminal,
+  Trash2,
+  Upload,
+  Zap,
+  Code,
+} from "lucide-react";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -89,7 +102,142 @@ function extractBanditSeverityCounts(report) {
   return { low, medium, high, total };
 }
 
-function App() {
+function HomePage({ onNavigate }) {
+  const features = [
+    {
+      icon: Search,
+      title: "Deep Logic Scan",
+      desc: "Identify complex logical bugs that traditional linters miss.",
+      color: "text-cyan-400",
+    },
+    {
+      icon: Shield,
+      title: "Security Audit",
+      desc: "Auto-detect vulnerability patterns and hardcoded secrets.",
+      color: "text-rose-400",
+    },
+    {
+      icon: Zap,
+      title: "Performance Boost",
+      desc: "Find expensive loops and risky bottlenecks in seconds.",
+      color: "text-amber-400",
+    },
+    {
+      icon: Terminal,
+      title: "Polyglot Support",
+      desc: "Analyze Java and C projects in one dashboard.",
+      color: "text-emerald-400",
+    },
+    {
+      icon: CheckCircle,
+      title: "Smart Refactoring",
+      desc: "Receive production-ready recommendations instantly.",
+      color: "text-blue-400",
+    },
+    {
+      icon: Code,
+      title: "Custom Heuristics",
+      desc: "Combines AI reasoning with static and security analysis.",
+      color: "text-violet-400",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background text-slate-200">
+      <div className="fixed left-[-90px] top-20 h-72 w-72 rounded-full bg-primary-500/20 blur-[90px]" />
+      <div className="fixed bottom-20 right-[-60px] h-72 w-72 rounded-full bg-accent-500/20 blur-[90px]" />
+
+      <nav className="sticky top-0 z-50 border-b border-slate-800 bg-background/85 backdrop-blur-md">
+        <div className="mx-auto flex h-16 w-[94%] max-w-7xl items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="rounded-lg bg-primary-500/10 p-2">
+              <Bug className="h-5 w-5 text-primary-500" />
+            </div>
+            <span className="text-xl font-bold tracking-tight">BugSense AI</span>
+          </div>
+
+          <button
+            onClick={() => onNavigate("/analyzer")}
+            className="btn-primary inline-flex items-center gap-2 text-sm"
+          >
+            Launch App
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </nav>
+
+      <main className="mx-auto w-[94%] max-w-7xl py-10">
+        <section className="mb-16 text-center">
+          <h1 className="mx-auto max-w-4xl text-5xl font-extrabold leading-tight md:text-7xl">
+            Write <span className="gradient-text">Flawless Code</span>
+            <br />
+            with Real-time AI Intelligence
+          </h1>
+          <p className="mx-auto mt-6 max-w-3xl text-slate-400">
+            BugSense AI detects logical errors, security vulnerabilities, and performance bottlenecks
+            before they hit production.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              onClick={() => onNavigate("/analyzer")}
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              Start Free Analysis
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <button className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 font-semibold text-slate-200 hover:bg-slate-800">
+              View Live Demo
+            </button>
+          </div>
+        </section>
+
+        <section className="mb-20 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {[
+            { icon: Zap, title: "Instant Review", desc: "Get technical insights and scores in seconds." },
+            { icon: Shield, title: "Security First", desc: "Spot risky code paths and secret leaks quickly." },
+            { icon: Code, title: "Smart Refactor", desc: "Generate practical fixes for faster iteration." },
+          ].map((item) => (
+            <article key={item.title} className="glass-card p-6">
+              <item.icon className="mb-4 h-8 w-8 text-primary-500" />
+              <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
+              <p className="text-slate-400">{item.desc}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="mb-16">
+          <h2 className="mb-3 text-center text-4xl font-bold">Why Choose BugSense AI?</h2>
+          <p className="mb-10 text-center text-slate-400">Built for developers who care about code quality and security.</p>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature) => (
+              <article key={feature.title} className="glass-card p-6">
+                <feature.icon className={`mb-4 h-8 w-8 ${feature.color}`} />
+                <h3 className="mb-2 text-xl font-bold">{feature.title}</h3>
+                <p className="text-slate-400">{feature.desc}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="glass-card mb-12 bg-primary-600/5 p-10 text-center">
+          <h2 className="mb-4 text-4xl font-bold">Ready to Ship Better Code?</h2>
+          <p className="mx-auto mb-7 max-w-2xl text-slate-400">
+            Join developers using BugSense AI to build more reliable software.
+          </p>
+          <button
+            onClick={() => onNavigate("/analyzer")}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            Get Started Now
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function AnalyzerPage() {
   const [code, setCode] = useState(SAMPLE_CODES[0].code);
   const [language, setLanguage] = useState("python");
   const [loading, setLoading] = useState(false);
@@ -496,6 +644,30 @@ function App() {
       </main>
     </div>
   );
+}
+
+function App() {
+  const [route, setRoute] = useState(window.location.pathname || "/");
+
+  useEffect(() => {
+    const onPop = () => setRoute(window.location.pathname || "/");
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  const navigate = (path) => {
+    if (window.location.pathname === path) {
+      return;
+    }
+    window.history.pushState({}, "", path);
+    setRoute(path);
+  };
+
+  if (route === "/analyzer") {
+    return <AnalyzerPage />;
+  }
+
+  return <HomePage onNavigate={navigate} />;
 }
 
 export default App;
