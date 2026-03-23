@@ -104,7 +104,7 @@ export default function HomePage({ onNavigate, currentPath }) {
         </section>
         
         {/* Footer CTA */}
-        <section className="w-full text-center py-20 relative z-10 glass-card bg-gradient-to-t from-primary-900/20 to-transparent">
+       <section className="w-full text-center py-20 relative z-10 glass-card bg-gradient-to-t from-primary-900/20 to-transparent flex flex-col items-center justify-center">
           <h2 className="text-4xl font-extrabold mb-6 text-white">Deploy With Supreme Confidence</h2>
           <p className="text-slate-400 max-w-2xl mx-auto mb-10 text-lg">Join the top 1% of developers shipping highly secure, performant software globally.</p>
           <button onClick={() => onNavigate("/analyzer")} className="btn-primary py-4 px-10 text-lg shadow-accent-glow hover:shadow-glow-pulse">
