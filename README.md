@@ -165,6 +165,7 @@ Byte_coders/
 │── README.md                        # Project documentation
 │── RSOC-2026.pdf                    # Project report/document
 │── RSOC-2026.pptx                   # Project presentation
+```
 ⚙️ Installation & Setup
 1️⃣ Backend Setup
 
