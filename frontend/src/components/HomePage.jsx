@@ -53,8 +53,8 @@ export default function HomePage({ onNavigate, currentPath }) {
               Start Free Analysis
               <ArrowRight className="h-5 w-5" />
             </button>
-            <button className="rounded-xl border border-white/10 bg-surface/50 backdrop-blur-md px-8 py-4 font-semibold text-white hover:bg-surface/80 hover:border-white/20 transition-all shadow-glass-sm w-full sm:w-auto">
-              View Architecture Matrix
+           <button onClick={() => onNavigate("/challenges")} className="rounded-xl border border-white/10 bg-surface/50 backdrop-blur-md px-8 py-4 font-semibold text-white hover:bg-surface/80 hover:border-white/20 transition-all shadow-glass-sm w-full sm:w-auto">
+              View Challenges
             </button>
           </div>
         </section>
